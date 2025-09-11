@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reviews - Therapisto</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #f9f9fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #1e90ff;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 50px 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #1e90ff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      background: #eef6ff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(30,144,255,0.15);
+      margin-bottom: 40px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline-color: #1e90ff;
+    }
+
+    input[type="submit"] {
+      background: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #0f5bb5;
+    }
+
+    /* Reviews list */
+    .reviews {
+      margin-top: 30px;
+    }
+
+    .review-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .review-card h4 {
+      margin: 0 0 5px;
+      color: #1e90ff;
+    }
+
+    .review-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .review-date {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .stars {
+      color: #ff9800;
+      margin-bottom: 10px;
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .popup-content h3 {
+      color: #1e90ff;
+      margin-bottom: 15px;
+    }
+
+    .close-btn {
+      background: #1e90ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .close-btn:hover {
+      background: #0f5bb5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Therapisto</h1>
+    <nav>
+      <a href="index.html#intro">Home</a>
+      <a href="#reviewForm">Give Review</a>
+    </nav>
+  </header>
+
+  <!-- Review Form -->
+  <section>
+    <h2>Share Your Experience</h2>
+    <form id="reviewForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="rating">Rating</label>
+      <select id="rating" name="rating" required>
+        <option value="">Select Rating</option>
+        <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+        <option value="4">⭐⭐⭐⭐ Good</option>
+        <option value="3">⭐⭐⭐ Average</option>
+        <option value="2">⭐⭐ Poor</option>
+        <option value="1">⭐ Very Bad</option>
+      </select>
+
+      <label for="message">Your Review</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <input type="submit" value="Submit Review">
+    </form>
+
+    <!-- Reviews Section -->
+    <div class="reviews" id="reviews">
+      <h2>What People Say</h2>
+
+      <!-- Pre-added reviews -->
+      <div class="review-card">
+        <h4>Priya Sharma</h4>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>The therapists here are amazing. They truly understand and listen. My overall experience was excellent.</p>
+        <div class="review-date">🗓️ Posted on: 10 Sept 2025, 3:15 PM</div>
+      </div>
+
+      <div class="review-card">
+        <h4>Rahul Mehta</h4>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <p>Great service and very supportive staff. Would recommend to my friends!</p>
+        <div class="review-date">🗓️ Posted on: 9 Sept 2025, 6:45 PM</div>
+      </div>
+
+      <div class="review-card">
+        <h4>Ananya Singh</h4>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>I feel so much better after joining here. The environment is comforting and very professional.</p>
+        <div class="review-date">🗓️ Posted on: 8 Sept 2025, 11:30 AM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup -->
+  <div class="popup" id="thankyouPopup">
+    <div class="popup-content">
+      <h3>✅ Thank you for your review!</h3>
+      <p>Your feedback helps us improve and serve better 💙</p>
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+<script>
+  const form = document.getElementById("reviewForm");
+  const reviewsDiv = document.getElementById("reviews");
+
+  // ✅ Fetch existing reviews from backend
+  async function loadReviews() {
+    try {
+      const res = await fetch("http://localhost:5000/reviews");
+      const reviews = await res.json();
+
+      reviewsDiv.innerHTML = "<h2>What People Say</h2>";
+
+      reviews.reverse().forEach(r => {
+        const date = new Date(r.datetime).toLocaleString("en-IN", {
+          day: "numeric", month: "short", year: "numeric",
+          hour: "numeric", minute: "2-digit"
+        });
+
+        const reviewCard = document.createElement("div");
+        reviewCard.className = "review-card";
+        reviewCard.innerHTML = `
+          <h4>${r.name}</h4>
+          <div class="stars">${"⭐".repeat(r.rating)}</div>
+          <p>${r.message}</p>
+          <div class="review-date">🗓️ Posted on: ${date}</div>
+        `;
+        reviewsDiv.appendChild(reviewCard);
+      });
+    } catch (err) {
+      console.error("Error loading reviews:", err);
+      reviewsDiv.innerHTML = "<p style='color:red'>⚠️ Could not load reviews</p>";
+    }
+  }
+
+  // ✅ Submit new review
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const rating = document.getElementById("rating").value;
+    const message = document.getElementById("message").value;
+    const datetime = new Date().toISOString(); // save exact time
+
+    try {
+      const res = await fetch("http://localhost:5000/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, rating, message, datetime }),
+      });
+
+      if (res.ok) {
+        form.reset();
+        document.getElementById("thankyouPopup").style.display = "flex";
+        loadReviews(); // refresh list
+      } else {
+        alert("❌ Failed to submit review.");
+      }
+    } catch (err) {
+      console.error("Error submitting review:", err);
+      alert("⚠️ Network error.");
+    }
+  });
+
+  function closePopup() {
+    document.getElementById("thankyouPopup").style.display = "none";
+  }
+
+  // Load reviews on page load
+  loadReviews();
+</script>
+
+
+</body>
+</html>

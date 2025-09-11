@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Therapist - Therapisto</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #f9f9fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #1e90ff;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 60px 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #1e90ff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .speech {
+      background: #eef6ff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(30,144,255,0.15);
+      line-height: 1.7;
+      margin-bottom: 30px;
+      max-height: 600px;
+      overflow-y: scroll; /* scroll for big text */
+    }
+
+    .therapist-photo {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .therapist-photo img {
+      width: 250px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    form {
+      background: #eef6ff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(30,144,255,0.15);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline-color: #1e90ff;
+    }
+
+    input[type="submit"] {
+      background: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #0f5bb5;
+    }
+
+    /* Popup Modal */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .popup-content h3 {
+      color: #1e90ff;
+      margin-bottom: 15px;
+    }
+
+    .popup-content p {
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background: #1e90ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .close-btn:hover {
+      background: #0f5bb5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Therapisto</h1>
+    <nav>
+      <a href="index.html#intro">Home</a>
+      <a href="#joinus">Join Us</a>
+    </nav>
+  </header>
+
+  <!-- Therapist Speech -->
+  <section>
+    <h2>Our Therapist’s Thoughts</h2>
+    <div class="therapist-photo">
+      <img src="Main-image.jpg" alt="Our Therapist">
+      <!-- Replace therapist.jpg with your real therapist photo -->
+    </div>
+    <div class="speech">
+      <p>
+        Healing is not a single moment; it is a journey.  
+        Every step you take, no matter how small, is a victory worth celebrating.  
+        In my years of practice, I’ve seen how powerful the human spirit can be.  
+        Pain, struggle, and obstacles may slow us down, but they cannot stop us when we believe in ourselves.  
+      </p>
+      <p>
+        (… keep adding many paragraphs with life advice, motivational messages, stories, reflections on therapy, mind-body connection, 
+        resilience, and encouragement. Fill up with **at least 100+ lines of rich text** so it looks like a real, long “speech”. 
+        Example themes: importance of self-care, power of patience, listening to your body, importance of community, hope, growth, positivity, etc.)
+      </p>
+      <p>
+        Each line can be simple, reflective, and easy to read, like:  
+        - “Your body carries your history, but it also carries your strength.”  
+        - “Healing may take time, but time itself is part of healing.”  
+        - “Never compare your progress to someone else’s. You are unique.”  
+        (Repeat until you get 100+ lines of speech.)
+      </p>
+    </div>
+  </section>
+
+  <!-- Join Us Form -->
+  <section id="joinus">
+  <h2>Join Us as a Therapist</h2>
+  <form id="therapistForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+    <!-- Web3Forms hidden inputs -->
+    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_API_KEY">
+    <input type="hidden" name="subject" value="New Therapist Application from Therapisto">
+    <input type="hidden" name="from_name" value="Therapisto Clinic">
+    <input type="checkbox" name="botcheck" style="display:none;" />
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="xxxxxxxxxx" required>
+
+    <label for="specialization">Specialization</label>
+    <input type="text" id="specialization" name="specialization" required>
+
+    <label for="cv">Upload CV</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+
+    <label for="message">Additional Message</label>
+    <textarea id="message" name="message" rows="4"></textarea>
+
+    <input type="submit" value="Submit Application">
+  </form>
+</section>
+
+  <!-- Popup Modal -->
+  <div class="popup" id="thankyouPopup">
+  <div class="popup-content">
+    <h3>✅ Thanks for applying!</h3>
+    <p>Our team will contact you soon. <br> Best wishes from Therapisto 💙</p>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+  <script>
+  const form = document.getElementById("therapistForm");
+  const popup = document.getElementById("thankyouPopup");
+
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+
+      if(result.success) {
+        popup.style.display = "flex";
+        form.reset();
+      } else {
+        alert("Error: " + result.message);
+      }
+    } catch (error) {
+      alert("Submission failed. Please try again later.");
+      console.error(error);
+    }
+  });
+
+  function closePopup() {
+    popup.style.display = "none";
+  }
+</script>
+</body>
+</html>

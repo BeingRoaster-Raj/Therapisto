@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Therapisto - Clinical Website</title>
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f9f9fb;
+      color: #333;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: #0077cc;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #005fa3;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e90ff;
+      padding: 20px 40px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(30, 144, 255, 0.4);
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: white;
+      cursor: pointer;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: white;
+      left: 0;
+      bottom: -6px;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Main top section */
+    #intro {
+      display: flex;
+      gap: 40px;
+      padding: 40px 60px;
+      align-items: center;
+      background: white;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    #intro img {
+      width: 50%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    #intro-content {
+      width: 50%;
+    }
+
+    #intro-content blockquote {
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 600;
+      color: #1e90ff;
+      margin-bottom: 20px;
+      border-left: 5px solid #1e90ff;
+      padding-left: 20px;
+      opacity: 0;
+      animation: fadeIn 2s 0.5s forwards;
+    }
+
+    #intro-content p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: #555;
+      opacity: 0;
+      animation: fadeIn 2s 1s forwards;
+    }
+
+    #readMoreBtn {
+      display: inline-block;
+      padding: 10px 25px;
+      background: #1e90ff;
+      color: white;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 2s 1.5s forwards;
+    }
+
+    #readMoreBtn:hover {
+      background: #0f5bb5;
+    }
+
+    /* Our Services */
+    #services {
+      padding: 60px 40px;
+      background: #eef6ff;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    #services h2 {
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      color: #1e90ff;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .services-grid > div {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(30,144,255,0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .services-grid > div:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(30,144,255,0.3);
+    }
+
+    .services-grid img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .services-grid > div:hover img {
+      transform: scale(1.05);
+    }
+
+    .services-grid h3 {
+      color: #1e90ff;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .service-detail {
+      margin-top: 12px;
+      color: #444;
+      font-size: 0.95rem;
+      text-align: left;
+      line-height: 1.4;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .service-detail.show {
+      max-height: 300px;
+      margin-top: 12px;
+    }
+
+    /* Our Therapist */
+    #therapist {
+      padding: 60px 40px;
+      background: white;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    #therapist h2 {
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      color: #1e90ff;
+    }
+
+    .therapist-profile {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .therapist-profile .details {
+      flex: 1 1 300px;
+      text-align: left;
+      padding: 20px;
+      background: #eef6ff;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(30,144,255,0.1);
+    }
+
+    .therapist-profile .details h3 {
+      color: #1e90ff;
+      margin-bottom: 15px;
+    }
+
+    .therapist-profile .photos {
+      flex: 1 1 300px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .therapist-profile .photos img {
+      width: 210px;
+      border-radius: 15px;
+      box-shadow: 0 4px 16px rgba(30,144,255,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .therapist-profile .photos img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(30,144,255,0.3);
+    }
+
+    /* Blog Section */
+    #blog {
+      background: #eef6ff;
+      padding: 60px 40px;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    #blog h2 {
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      color: #1e90ff;
+    }
+
+    .blog-cards {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(30,144,255,0.1);
+      padding: 20px;
+      cursor: default;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .blog-card:hover {
+      box-shadow: 0 12px 32px rgba(30,144,255,0.3);
+    }
+
+    .blog-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .blog-card h3 {
+      color: #1e90ff;
+      margin-bottom: 10px;
+    }
+
+    .blog-card p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* Appointment Section */
+    #appointment {
+      background: white;
+      padding: 60px 40px;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    #appointment h2 {
+      color: #1e90ff;
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+    }
+
+    #appointment form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #eef6ff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(30,144,255,0.1);
+      font-size: 1rem;
+    }
+
+    #appointment table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #appointment th, #appointment td {
+      padding: 15px 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    #appointment select,
+    #appointment input[type="text"],
+    #appointment input[type="email"],
+    #appointment input[type="tel"],
+    #appointment input[type="date"],
+    #appointment input[type="time"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      outline-color: #1e90ff;
+      transition: border-color 0.3s ease;
+    }
+
+    #appointment select:focus,
+    #appointment input[type="text"]:focus,
+    #appointment input[type="email"]:focus,
+    #appointment input[type="tel"]:focus,
+    #appointment input[type="date"]:focus,
+    #appointment input[type="time"]:focus {
+      border-color: #1e90ff;
+    }
+
+    #appointment input[type="submit"] {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #1e90ff;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #appointment input[type="submit"]:hover {
+      background: #0f5bb5;
+    }
+
+    /* Footer */
+    footer {
+      display: flex;
+      background: #1e90ff;
+      color: white;
+      padding: 40px 60px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    footer > div {
+      flex: 1 1 250px;
+    }
+
+    footer h3 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      border-bottom: 2px solid white;
+      padding-bottom: 8px;
+    }
+
+    footer ul {
+      list-style: none;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    footer ul li:hover {
+      text-decoration: underline;
+    }
+
+    footer address {
+      font-style: normal;
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #a9d1ff;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-15px);}
+    }
+
+    
+/* Responsive */
+@media (max-width: 900px) {
+  #intro {
+    flex-direction: column;
+  }
+
+  #intro img,
+  #intro-content {
+    width: 100%;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .therapist-profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .therapist-profile .details,
+  .therapist-profile .photos {
+    width: 100%;
+  }
+
+  #appointment form {
+    padding: 20px;
+  }
+}
+
+
+      #intro img,
+      #intro-content {
+        width: 100%;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Therapisto</h1>
+    <nav>
+      <a href="#intro">Home</a>
+      <a href="#services">Services</a>
+      <a href="#therapist">Therapist</a>
+      <a href="#blog">Blogs</a>
+      <a href="#appointment">Appointment</a>
+    </nav>
+  </header>
+
+  <!-- Intro Section -->
+  <section id="intro">
+    <img src="main_img.jpg" alt="Therapy Image" />
+    <div id="intro-content">
+      <blockquote>"Healing Begins Here"</blockquote>
+      <p>Ready to take control of your health journey? At Therapisto, we empower you to explore effective alternate therapies that complement traditional approaches and foster lasting wellness. Discover personalized solutions and embrace a more harmonious way of living.</p>
+      <p>Our methods combine traditional and modern therapeutic techniques to ensure effective and lasting results.</p>
+      <p>From pain management to holistic treatments, we have a wide range of services designed to cater to your unique needs.</p>
+      <p>Our clinic is equipped with advanced facilities and a compassionate team to support you at every step of your healing journey.</p>
+      <p>Experience comfort, care, and professionalism at Therapisto.</p>
+      <span id="readMoreBtn" onclick="openReadMore()">Read more</span>
+    </div>
+  </section>
+
+  <!-- Read More Page (hidden by default) -->
+  <section id="readMoreSection" style="display:none; padding: 40px 60px; background:#eef6ff; animation: fadeInUp 1s ease forwards;">
+    <h2>About Therapisto</h2>
+    <p>
+      Therapisto was founded with the mission to bring holistic healing to the community. Our clinic offers a diverse range of therapeutic treatments,
+      combining evidence-based practices and compassionate care. Our team of certified therapists continually updates their skills to incorporate
+      the latest advances in therapy and wellness.
+    </p>
+    <p>
+      We believe in a personalized approach that treats the individual, not just the symptoms. Each treatment plan is designed after thorough
+      evaluation to ensure the best outcomes. Whether you seek relief from chronic pain, recovery from injury, or stress management, Therapisto
+      provides a supportive environment for your healing.
+    </p>
+    <p>
+      Our facilities are equipped with modern equipment, and our services include vacuum & fire cupping, chiropractic treatment, dry needling,
+      acupressure, auricular therapy, pain management, and much more. We are committed to helping you regain vitality and improve your quality
+      of life.
+    </p>
+    <button onclick="closeReadMore()" style="margin-top:20px; padding:10px 25px; border:none; background:#1e90ff; color:white; border-radius:25px; cursor:pointer; font-weight:600; font-size:1rem; transition:background 0.3s ease;">Close</button>
+  </section>
+
+  <!-- Our Services -->
+  <section id="services" class="section">
+  <h2>Our Services</h2>
+  <div class="services-grid">
+
+    <div onclick="openModal('cupping')">
+      <img src="cupping.png" alt="Vacuum & Fire Cupping">
+      <h3>Vacuum & Fire Cupping</h3>
+    </div>
+
+    <div onclick="openModal('chiropractic')">
+      <img src="chiropatic care.png" alt="Chiropractic Treatment">
+      <h3>Chiropractic Treatment</h3>
+    </div>
+
+    <div onclick="openModal('needle')">
+      <img src="accupunter.png" alt="Dry Needle & Acupressure">
+      <h3>Dry Needle & Acupressure</h3>
+    </div>
+
+    <div onclick="openModal('auricular')">
+      <img src="Ear.png" alt="Auricular Therapy">
+      <h3>Auricular Therapy</h3>
+    </div>
+
+    <div onclick="openModal('pain')">
+      <img src="pain.jpg" alt="Pain Management">
+      <h3>Pain Management</h3>
+    </div>
+    <div onclick="openModal('Gym')">
+      <img src="Gym Protocol.png" alt="Gym Protocol">
+      <h3>Gym Protocol</h3>
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal Popup -->
+<div id="serviceModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:#fff; padding:30px; border-radius:12px; max-width:600px; width:90%; position:relative; animation:fadeInUp 0.5s ease forwards;">
+    <span onclick="closeModal()" style="position:absolute; top:10px; right:20px; font-size:1.5rem; cursor:pointer; color:#555;">&times;</span>
+    <h2 id="modalTitle" style="color:#1e90ff; margin-bottom:15px;"></h2>
+    <p id="modalContent" style="color:#444; line-height:1.6;"></p>
+  </div>
+</div>
+
+  <!-- Our Therapist -->
+  <section id="therapist">
+    <h2>Our Therapist</h2>
+    <div class="therapist-profile">
+      <div class="details">
+        <h3>Sujal Raj</h3>
+        <p><strong>Qualifications:</strong> DAT, Certified in acupuncture ,cupping ,manual therapies,chiropractic treatment and more alternate therapies</p>
+        <p><strong>Experience:</strong> 7+ years in physiotherapy and pain management.</p>
+        <p><strong>Specialization:</strong> Sports injuries, orthopedic therapy, and rehabilitation.</p>
+        <p>Sujal Raj is passionate about helping patients regain mobility and live pain-free lives through personalized therapy plans.</p>
+      </div>
+      <div class="photos">
+        <img src="sujal1.jpg" alt="Dr. Priya Sharma 1" />
+        <img src="pic1.png" alt="Dr. Priya Sharma 2" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog">
+    <h2>Blogs</h2>
+    <div class="blog-cards">
+<article class="blog-card" onclick="openBlogModal(
+  'blog1.jpg',
+  'The Benefits of Cupping Therapy',
+  'Learn how cupping can relieve muscle tension, promote blood flow, and help with recovery after exercise. This therapy is rooted in traditional Chinese medicine and is increasingly used in modern wellness treatments.'
+)">
+  <img src="blog1.jpg" alt="Benefits of Cupping" />
+  <h3>The Benefits of Cupping Therapy</h3>
+  <p>Learn how cupping can relieve muscle tension...</p>
+</article>
+
+<article class="blog-card" onclick="openBlogModal(
+  'blog3.jpg',
+  'Understanding Chiropractic Care',
+  'Discover how spinal adjustments can alleviate pain and improve your overall posture and health. Chiropractic care is an effective, non-invasive treatment for many musculoskeletal conditions.'
+)">
+  <img src="blog3.jpg" alt="Chiropractic Explained" />
+  <h3>Understanding Chiropractic Care</h3>
+  <p>Discover how spinal adjustments can alleviate pain...</p>
+</article>
+
+<article class="blog-card" onclick="openBlogModal(
+  'blog31.jpg',
+  'Managing Chronic Pain Effectively',
+  'Explore various therapies and lifestyle changes that can help you manage chronic pain and improve your quality of life. From physical therapy to mindfulness practices, find the support you need.'
+)">
+  <img src="blog31.jpg" alt="Managing Chronic Pain" />
+  <h3>Managing Chronic Pain Effectively</h3>
+  <p>Explore various therapies and lifestyle changes...</p>
+</article>
+</div>
+  </section>
+
+  <!-- Appointment Section -->
+  <section id="appointment">
+    <h2>Book an Appointment</h2>
+    <!-- <form id="appointmentForm"> -->
+  <form action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="8dccb7bd-8b56-470e-ae82-4383740d7545">
+  <input type="hidden" name="subject" value="New Appointment Booking from Therapisto">
+  <input type="hidden" name="from_name" value="Therapisto Clinic">
+  <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you.html"> -->
+  <input type="checkbox" name="botcheck" style="display:none;" />
+      <table>
+        <tr>
+          <th><label for="name">Name:</label></th>
+          <td><input type="text" id="name" name="name" required /></td>
+        </tr>
+        <tr>
+          <th><label for="email">Email:</label></th>
+          <td><input type="email" id="email" name="email" required /></td>
+        </tr>
+        <tr>
+          <th><label for="phone">Phone:</label></th>
+          <td><input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="xxxxxxxxxx" required /></td>
+        </tr>
+        <tr>
+          <th><label for="date">Date:</label></th>
+          <td><input type="date" id="date" name="date" required /></td>
+        </tr>
+        <tr>
+          <th><label for="time">Time:</label></th>
+          <td><input type="time" id="time" name="time" required /></td>
+        </tr>
+        <tr>
+          <th><label for="service">Select Service:</label></th>
+          <td>
+            <select id="service" name="service" required>
+              <option value="">-- Select a Service --</option>
+              <option value="Vacuum & Fire Cupping">Vacuum & Fire Cupping</option>
+              <option value="Chiropractic Treatment">Chiropractic Treatment</option>
+              <option value="Dry Needle & Acupressure">Dry Needle & Acupressure</option>
+              <option value="Auricular Therapy">Auricular Therapy</option>
+              <option value="Pain Management">Pain Management</option>
+              <option value="Pain Management">Gym Queries</option>
+
+
+            </select>
+          </td>
+        </tr>
+      </table>
+      <input type="submit" value="Book Appointment" />
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <h3>Address</h3>
+      <address>
+        Gyan ganga gali, in front of baranwal bhawan<br />
+        near Kidzee School, Patna, Bihar 800004, India<br />
+      </address>
+      <h4>Find us on Map </h4>
+      <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.1029941878346!2d85.14601547524902!3d25.60800167744882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed59053695134d%3A0x4ac385373b9838c9!2sTherapisto!5e1!3m2!1sen!2sus!4v1749285534666!5m2!1sen!2sus"
+      width="80%"
+      height="250"
+      style="border:0; border-radius:12px;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    </div>
+    <div>
+      <h3>Contact Us</h3>
+      <li>Phone :- +91 9798665749</li>
+      <li>Email :- therapisto100@gmail.com</li>
+      <h4>_________________________________</h4>
+      <h4>Follow Us On</h4>
+      <li><a href="https://www.instagram.com/invites/contact/?i=1726m90qt5y3e&utm_content=metza0h">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="https://youtube.com/@therapisto_?si=ntxpKi_gMkE1tZgh">YouTube</a></li>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#intro">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#therapist">Therapist</a></li>
+        <li><a href="#blog">Blogs</a></li>
+        <li><a href="#appointment">Appointment</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle service detail on click
+    function toggleService(id) {
+      const detail = document.getElementById(id);
+      if (detail.style.display === 'block') {
+        detail.style.display = 'none';
+      } else {
+        // Hide all others first
+        const allDetails = document.querySelectorAll('.service-detail');
+        allDetails.forEach(d => (d.style.display = 'none'));
+        detail.style.display = 'block';
+      }
+    }
+
+    // Read more open/close
+    function openReadMore() {
+      document.getElementById('readMoreSection').style.display = 'block';
+      document.getElementById('intro').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeReadMore() {
+      document.getElementById('readMoreSection').style.display = 'none';
+      document.getElementById('intro').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Appointment form validation (simple example)
+    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for booking an appointment! We will contact you shortly.');
+      this.reset();
+    });
+  </script>
+  <script>
+// Open modal with service details
+function openModal(serviceId) {
+  const modal = document.getElementById('serviceModal');
+  const title = document.getElementById('modalTitle');
+  const content = document.getElementById('modalContent');
+
+  const services = {
+    cupping: {
+      title: 'Vacuum & Fire Cupping',
+      content: 'Vacuum and fire cupping therapy involves placing special cups on the skin to create suction. This technique is used to ease muscle tension, improve blood circulation, and promote cell repair. It is effective for treating back pain, inflammation, and general muscle relaxation.'
+    },
+    chiropractic: {
+      title: 'Chiropractic Treatment',
+      content: 'Chiropractic treatment focuses on spinal manipulation to relieve pressure, improve posture, and reduce nerve interference. Ideal for back pain, headaches, joint issues, and posture improvement.'
+    },
+    needle: {
+      title: 'Dry Needle & Acupressure',
+      content: 'Dry needling involves inserting thin needles into trigger points to relieve muscle pain and tension. Acupressure applies pressure to specific points to improve energy flow and reduce stress.'
+    },
+    auricular: {
+      title: 'Auricular Therapy',
+      content: 'Auricular therapy is a form of acupuncture focused on the ear to treat health conditions like pain, stress, and addiction. It stimulates nerve endings and promotes healing throughout the body.'
+    },
+    pain: {
+      title: 'Pain Management',
+      content: 'Our pain management program combines therapies like physical therapy, medication, and counseling to help patients manage chronic and acute pain effectively.'
+    },
+     Gym: {
+      title: 'Gym Protocol',
+      content: 'In a therapy setting, gym protocol involves ensuring exercises are performed under supervision, using equipment tailored to the clients needs, and maintaining hygiene. Therapists also monitor progress and prioritize client safety and comfort during rehabilitation or fitness routines.'
+    }
+  };
+
+  title.textContent = services[serviceId].title;
+  content.textContent = services[serviceId].content;
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('serviceModal').style.display = 'none';
+}
+</script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCQJi60UZ09eCwukmPFopLIlf-2HVNUfAI",
+    authDomain: "therapisto.firebaseapp.com",
+    projectId: "therapisto",
+    storageBucket: "therapisto.firebasestorage.app",
+    messagingSenderId: "806683094356",
+    appId: "1:806683094356:web:377c9301f1d6a41efeecc1",
+    measurementId: "G-HKV1GQ9YVF"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+
+<!-- Blog Modal -->
+<div id="blogModal" style="display:none; position:fixed; top:0; left:0; width:80%; height:90%; z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; border-radius:10px; padding:30px; max-width:650px; width:80%; position:relative;">
+    <span onclick="closeBlogModal()" style="position:absolute; top:10px; right:14px; font-size:1.5rem; cursor:pointer; font-weight:bold;">&times;</span>
+    <img id="modalImage" src="" style="width:100%; border-radius:12px; margin-bottom:20px;" />
+    <h3 id="modalTitle" style="color:#1e90ff;"></h3>
+    <p id="modalText" style="color:#333;"></p>
+  </div>
+</div>
+
+<script>
+  function openBlogModal(imageSrc, title, text) {
+    document.getElementById("modalImage").src = imageSrc;
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalText").innerText = text;
+    document.getElementById("blogModal").style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeBlogModal() {
+    document.getElementById("blogModal").style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | Therapisto</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f4f4; margin:0; padding:0; }
+    
+    /* Header styles */
+    header {
+      background: #1e90ff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px white;
+    }
+    header h1 { font-size: 1.5rem; margin: 0; color: white; }
+    header a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    header a:hover { color: #0056b3; }
+
+    /* Page content */
+    .container { padding: 30px; }
+    form {
+      max-width: 750px; margin: auto;
+      background: white; padding: 25px;
+      border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label { display: block; margin: 12px 0 5px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%; padding: 10px;
+      margin-bottom: 15px; border: 1px solid #ccc;
+      border-radius: 6px; font-size: 1rem;
+    }
+    button[type="submit"] {
+      background: #1e90ff; color: white;
+      padding: 12px; border: none;
+      border-radius: 6px; cursor: pointer;
+      width: 100%; font-size: 1rem;
+    }
+    button[type="submit"]:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Book Appointment</h1>
+    <a href="index.html">Home</a>
+  </header>
+
+  <!-- Page content -->
+  <div class="container">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <!-- Web3Forms required hidden fields -->
+      <input type="hidden" name="access_key" value="8dccb7bd-8b56-470e-ae82-4383740d7545">
+      <input type="hidden" name="subject" value="New Appointment Booking from Therapisto">
+      <input type="hidden" name="from_name" value="Therapisto Clinic">
+      <input type="checkbox" name="botcheck" style="display:none;" />
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="xxxxxxxxxx" required>
+
+      <label for="service">Service</label>
+      <select id="service" name="service" required>
+        <option value="">-- Select a Service --</option>
+        <option value="Individual Therapy">Individual Therapy</option>
+        <option value="Couples Therapy">Couples Therapy</option>
+        <option value="Group Therapy">Group Therapy</option>
+        <option value="Child Counseling">Child Counseling</option>
+        <option value="Vacuum & Fire Cupping">Vacuum & Fire Cupping</option>
+        <option value="Chiropractic Treatment">Chiropractic Treatment</option>
+        <option value="Dry Needle & Acupressure">Dry Needle & Acupressure</option>
+        <option value="Auricular Therapy">Auricular Therapy</option>
+        <option value="Pain Management">Pain Management</option>
+        <option value="Gym Protocol">Gym Protocol</option>
+      </select>
+
+      <label for="date">Preferred Date</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Preferred Time</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="message">Additional Notes</label>
+      <textarea id="message" name="message" rows="4" placeholder="Any specific requests?"></textarea>
+
+      <button type="submit">Confirm Appointment</button>
+    </form>
+  </div>
+
+  <script>
+    // Autofill service based on query param
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedService = urlParams.get("service");
+    if (selectedService) {
+      document.getElementById("service").value = selectedService;
+    }
+  </script>
+</body>
+</html>

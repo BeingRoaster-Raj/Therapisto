@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapisto | Services</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#f9f9f9; }
+
+    /* Header styles */
+    header {
+      background: #1e90ff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 1.5rem; margin: 0; color: white;}
+    header a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    header a:hover { color: #0056b3; }
+
+    /* Page content */
+    .container { padding: 20px; }
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out;
+    }
+    .service-card:hover { transform: translateY(-5px); }
+    .service-card img {
+        width: 100%;
+  height: auto;       /* Let height adjust automatically */
+  max-height: 250px;  /* Optional: limit the height */
+  object-fit: contain; /* Shows the entire image without cropping */
+  display: block;
+  margin: 0 auto;
+  background: #f4f4f4;
+    }
+    .service-content { padding: 20px; }
+    .service-content h3 { color: #1e90ff; margin-bottom: 10px; }
+    .service-content p { color: #444; margin-bottom: 15px; }
+    .service-content button {
+      background: #1e90ff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .service-content button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Our Services</h1>
+    <a href="index.html">Home</a>
+  </header>
+
+  <!-- Page content -->
+  <div class="container">
+    <div class="services-container">
+
+      <!-- Existing Services -->
+      <div class="service-card">
+        <img src="shrink_14241785.png" alt="Individual Therapy">
+        <div class="service-content">
+          <h3>Individual Therapy</h3>
+          <p>Personalized one-on-one sessions to improve mental well-being and manage stress effectively.</p>
+          <button onclick="bookAppointment('Individual Therapy')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="counselling_4525574.png" alt="Couples Therapy">
+        <div class="service-content">
+          <h3>Couples Therapy</h3>
+          <p>Helps partners resolve conflicts, improve communication, and build stronger relationships.</p>
+          <button onclick="bookAppointment('Couples Therapy')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="organization_9733547.png" alt="Group Therapy">
+        <div class="service-content">
+          <h3>Group Therapy</h3>
+          <p>Supportive group sessions that encourage sharing experiences and overcoming challenges together.</p>
+          <button onclick="bookAppointment('Group Therapy')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="child.png" alt="Child Counseling">
+        <div class="service-content">
+          <h3>Child Counseling</h3>
+          <p>Specialized counseling for children to help them cope with stress, anxiety, and behavioral issues.</p>
+          <button onclick="bookAppointment('Child Counseling')">Book Appointment</button>
+        </div>
+      </div>
+
+      <!-- New Services -->
+      <div class="service-card">
+        <img src="cupping.png" alt="Vacuum & Fire Cupping">
+        <div class="service-content">
+          <h3>Vacuum & Fire Cupping</h3>
+          <p>Traditional therapy that improves circulation and relieves muscle tension using suction cups.</p>
+          <button onclick="bookAppointment('Vacuum & Fire Cupping')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="accupunter.png" alt="Dry Needle & Acupressure">
+        <div class="service-content">
+          <h3>Dry Needle & Acupressure</h3>
+          <p>Combination of acupuncture and pressure techniques to relieve pain and enhance body healing.</p>
+          <button onclick="bookAppointment('Dry Needle & Acupressure')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="Ear.png" alt="Auricular Therapy">
+        <div class="service-content">
+          <h3>Auricular Therapy</h3>
+          <p>Ear-based therapy that stimulates reflex points to improve overall wellness and reduce stress.</p>
+          <button onclick="bookAppointment('Auricular Therapy')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="pain.jpg" alt="Pain Management">
+        <div class="service-content">
+          <h3>Pain Management</h3>
+          <p>Specialized techniques to alleviate chronic pain and restore mobility effectively.</p>
+          <button onclick="bookAppointment('Pain Management')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="Gym Protocol.png" alt="Gym Protocol">
+        <div class="service-content">
+          <h3>Gym Protocol</h3>
+          <p>Customized exercise routines to improve physical fitness and support therapy goals.</p>
+          <button onclick="bookAppointment('Gym Protocol')">Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="chiropatic care.png" alt="Chiropractic Treatment">
+        <div class="service-content">
+          <h3>Chiropractic Treatment</h3>
+          <p>Hands-on treatment to correct spinal alignment and enhance nervous system function.</p>
+          <button onclick="bookAppointment('Chiropractic Treatment')">Book Appointment</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function bookAppointment(serviceName) {
+      // Redirect to appointment page with query parameter
+      window.location.href = "appointment.html?service=" + encodeURIComponent(serviceName);
+    }
+  </script>
+</body>
+</html>
