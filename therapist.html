@@ -203,7 +203,7 @@
   <h2>Join Us as a Therapist</h2>
   <form id="therapistForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
     <!-- Web3Forms hidden inputs -->
-    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_API_KEY">
+    <input type="hidden" name="access_key" value="8dccb7bd-8b56-470e-ae82-4383740d7545">
     <input type="hidden" name="subject" value="New Therapist Application from Therapisto">
     <input type="hidden" name="from_name" value="Therapisto Clinic">
     <input type="checkbox" name="botcheck" style="display:none;" />
@@ -220,8 +220,10 @@
     <label for="specialization">Specialization</label>
     <input type="text" id="specialization" name="specialization" required>
 
-    <label for="cv">Upload CV</label>
-    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+<!--     <label for="cv">Upload CV</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required> -->
+    <label for="cv_link">CV Link (Google Drive/Dropbox)</label>
+    <input type="url" id="cv_link" name="cv_link" placeholder="Paste your CV link here" required>
 
     <label for="message">Additional Message</label>
     <textarea id="message" name="message" rows="4"></textarea>
@@ -273,3 +275,4 @@
 </script>
 </body>
 </html>
+
